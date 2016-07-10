@@ -75,7 +75,7 @@
 @implementation NSTimer (HF)
 
 #ifndef USE_HOOK_MODE
-#pragma mark -- 分类模式。 缺点在于使用方法的改变
+#pragma mark -- 分类模式。 缺点在于使用方法的改变, 
 + (NSTimer *)timerWithTimeInterval:(NSTimeInterval)ti invocation:(NSInvocation *)invocation repeats:(BOOL)yesOrNo prettyType:(NSTimerPrettyType)prettyType {
    
     
