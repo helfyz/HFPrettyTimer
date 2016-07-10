@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 
 
-//#define USE_HOOK_MODE
+//#define HF_TIMER_USE_HOOK_MODE
 
 
 @interface NSTimer (HF)
 
-#ifndef USE_HOOK_MODE
+#ifndef HF_TIMER_USE_HOOK_MODE
 
 typedef NS_ENUM(NSInteger,NSTimerPrettyType) {
     
