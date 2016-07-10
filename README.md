@@ -6,6 +6,9 @@
         2，自动invalidate， 现在github上很多弱化target的timer，但是极少有自动invalidate。
            加这个的考虑是。既然target 都被释放了。timer还运行个什么劲？
   
+  和HFTimer(https://github.com/helfyz/HFTimer) 不同的是， HTTimer 检测的是timer本身不被持有，便会被销毁
+  HFPrettyTimer 检测的是target，target被销毁，timer也没有存在的意义了吧
+  
    提供了两种模式。默认采用分类的方式 ，
    
    分类方式
