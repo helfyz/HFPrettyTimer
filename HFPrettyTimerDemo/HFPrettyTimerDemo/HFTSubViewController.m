@@ -27,6 +27,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (IBAction)startTimer:(id)sender {
     
         SEL sel = @selector(changNumber);
