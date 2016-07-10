@@ -25,8 +25,11 @@ typedef NS_ENUM(NSInteger,NSTimerPrettyType) {
 };
 
 + (NSTimer *_Nonnull)timerWithTimeInterval:(NSTimeInterval)ti invocation:(NSInvocation *_Nonnull)invocation repeats:(BOOL)yesOrNo prettyType:(NSTimerPrettyType)prettyType;
+
 + (NSTimer *_Nonnull)scheduledTimerWithTimeInterval:(NSTimeInterval)ti invocation:(NSInvocation * _Nonnull)invocation repeats:(BOOL)yesOrNo prettyType:(NSTimerPrettyType)prettyType;
+
 + (NSTimer *_Nonnull)timerWithTimeInterval:(NSTimeInterval)ti target:(id _Nonnull)aTarget selector:(SEL _Nonnull)aSelector userInfo:(nullable id)userInfo repeats:(BOOL)yesOrNo prettyType:(NSTimerPrettyType)prettyType;
+
 + (NSTimer *_Nonnull)scheduledTimerWithTimeInterval:(NSTimeInterval)ti target:(id _Nonnull)aTarget selector:(SEL _Nonnull)aSelector userInfo:(nullable id)userInfo repeats:(BOOL)yesOrNo prettyType:(NSTimerPrettyType)prettyType;
 #endif
 
