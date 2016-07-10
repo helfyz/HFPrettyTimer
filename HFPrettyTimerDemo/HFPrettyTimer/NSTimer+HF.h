@@ -7,6 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+
+
+//#define USE_HOOK_MODE
+
+
+@interface NSTimer (HF)
+
+#ifndef USE_HOOK_MODE
+
 typedef NS_ENUM(NSInteger,NSTimerPrettyType) {
     
     NSTimerPrettyTypeDetault = 0,       //不做任何释放或者weak target操作
@@ -14,6 +23,13 @@ typedef NS_ENUM(NSInteger,NSTimerPrettyType) {
     NSTimerPrettyTypeAutoInvalidate,    //当timer的持有者释放时，timer 自动invalidate  ，注:当持有者和timer 循环引用的时候。是不会起作用的，不推荐使用
     NSTimerPrettyTypeBoth,              // 弱化 并 主动invalidate  ，WeakTarget & AutoInvalidate 只是为一些变态需求提供出来，
 };
-@interface NSTimer (HF)
+
++ (NSTimer *_Nonnull)timerWithTimeInterval:(NSTimeInterval)ti invocation:(NSInvocation *_Nonnull)invocation repeats:(BOOL)yesOrNo prettyType:(NSTimerPrettyType)prettyType;
++ (NSTimer *_Nonnull)scheduledTimerWithTimeInterval:(NSTimeInterval)ti invocation:(NSInvocation * _Nonnull)invocation repeats:(BOOL)yesOrNo prettyType:(NSTimerPrettyType)prettyType;
++ (NSTimer *_Nonnull)timerWithTimeInterval:(NSTimeInterval)ti target:(id _Nonnull)aTarget selector:(SEL _Nonnull)aSelector userInfo:(nullable id)userInfo repeats:(BOOL)yesOrNo prettyType:(NSTimerPrettyType)prettyType;
++ (NSTimer *_Nonnull)scheduledTimerWithTimeInterval:(NSTimeInterval)ti target:(id _Nonnull)aTarget selector:(SEL _Nonnull)aSelector userInfo:(nullable id)userInfo repeats:(BOOL)yesOrNo prettyType:(NSTimerPrettyType)prettyType;
+#endif
+
+
 
 @end

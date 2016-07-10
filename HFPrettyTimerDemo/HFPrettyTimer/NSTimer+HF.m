@@ -22,19 +22,18 @@
  *
  *  @return 观察者
  */
-+ (HFWatcher *)watcherForTarget:(id)target
-{
++ (HFWatcher *)watcherForTarget:(id)target {
     HFWatcher *watcher = [[HFWatcher alloc] init];
     objc_setAssociatedObject(target, "hf_watcher",watcher, OBJC_ASSOCIATION_RETAIN);
     return watcher;
 }
 
--(void)dealloc
-{
+-(void)dealloc {
     NSLog(@"HFWatcher dealloc");
     if(self.timer)
     {
         [self.timer invalidate];
+        self.timer = nil;
     }
 }
 @end
@@ -53,24 +52,21 @@
  *
  *  @return 弱引用对象
  */
-+ (HFWeakTarget *)weakTargetFor:(id)target
-{
++ (HFWeakTarget *)weakTargetFor:(id)target {
     HFWeakTarget *otherTarget = [[HFWeakTarget alloc] init];
     otherTarget.target = target;
     return otherTarget;
 }
 
-- (BOOL)respondsToSelector:(SEL)aSelector
-{
+- (BOOL)respondsToSelector:(SEL)aSelector {
     return [self.target respondsToSelector:aSelector];
 }
 
-- (id)forwardingTargetForSelector:(SEL)aSelector
-{
+- (id)forwardingTargetForSelector:(SEL)aSelector {
     return self.target;
 }
--(void)dealloc
-{
+
+-(void)dealloc {
     NSLog(@"HFWeakTarget dealloc");
 }
 @end
@@ -78,6 +74,140 @@
 
 @implementation NSTimer (HF)
 
+#ifndef USE_HOOK_MODE
+#pragma mark -- 分类模式。 缺点在于使用方法的改变
++ (NSTimer *)timerWithTimeInterval:(NSTimeInterval)ti invocation:(NSInvocation *)invocation repeats:(BOOL)yesOrNo prettyType:(NSTimerPrettyType)prettyType {
+   
+    
+    HFWatcher *watcher = nil;
+    HFWeakTarget *otherTarget = nil;
+    switch (prettyType) {
+        case NSTimerPrettyTypeWeakTarget: {
+            otherTarget =  [HFWeakTarget weakTargetFor:invocation.target];
+            invocation.target = otherTarget;
+        }
+            break;
+        case NSTimerPrettyTypeAutoInvalidate: {
+            watcher = [HFWatcher watcherForTarget:invocation.target];
+        }
+            break;
+        case NSTimerPrettyTypeBoth: {
+            watcher = [HFWatcher watcherForTarget:invocation.target];
+    
+            otherTarget = [HFWeakTarget weakTargetFor:invocation.target];
+            invocation.target = otherTarget;
+        }
+            break;
+        default:
+            break;
+    }
+    
+    NSTimer *timer = [self timerWithTimeInterval:ti invocation:invocation repeats:yesOrNo];
+    if(watcher) {
+        watcher.timer = timer;
+    }
+    return timer;
+}
+
++ (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)ti invocation:(NSInvocation *)invocation repeats:(BOOL)yesOrNo prettyType:(NSTimerPrettyType)prettyType {
+    
+    HFWatcher *watcher = nil;
+    HFWeakTarget *otherTarget = nil;
+    
+    switch (prettyType) {
+        case NSTimerPrettyTypeWeakTarget: {
+             otherTarget =  [HFWeakTarget weakTargetFor:invocation.target];
+            invocation.target = otherTarget;
+        }
+            break;
+        case NSTimerPrettyTypeAutoInvalidate: {
+            watcher = [HFWatcher watcherForTarget:invocation.target];
+        }
+            break;
+        case NSTimerPrettyTypeBoth: {
+            watcher = [HFWatcher watcherForTarget:invocation.target];
+            
+            otherTarget =  [HFWeakTarget weakTargetFor:invocation.target];
+            invocation.target = otherTarget;
+            
+        }
+            break;
+        default:
+            break;
+    }
+    
+    NSTimer *timer = [self scheduledTimerWithTimeInterval:ti invocation:invocation repeats:yesOrNo];
+    if(watcher) {
+        watcher.timer = timer;
+    }
+    return timer;
+}
+
++ (NSTimer *)timerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(nullable id)userInfo repeats:(BOOL)yesOrNo prettyType:(NSTimerPrettyType)prettyType {
+    
+    HFWatcher *watcher;
+    id newTarget = aTarget;
+    switch (prettyType) {
+        case NSTimerPrettyTypeWeakTarget: {
+            HFWeakTarget *otherTarget =  [HFWeakTarget weakTargetFor:aTarget];
+            newTarget = otherTarget;
+        }
+            break;
+        case NSTimerPrettyTypeAutoInvalidate: {
+                watcher = [HFWatcher watcherForTarget:aTarget];
+        }
+            break;
+        case NSTimerPrettyTypeBoth: {
+            watcher = [HFWatcher watcherForTarget:aTarget];
+            HFWeakTarget *otherTarget =  [HFWeakTarget weakTargetFor:aTarget];
+            newTarget = otherTarget;
+            
+        }
+            break;
+        default:
+            break;
+    }
+    
+    NSTimer *timer = [self timerWithTimeInterval:ti target:newTarget selector:aSelector userInfo:userInfo repeats:yesOrNo];
+    if(watcher) {
+       watcher.timer = timer;
+    }
+    return timer;
+}
+
++ (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(nullable id)userInfo repeats:(BOOL)yesOrNo prettyType:(NSTimerPrettyType)prettyType {
+    HFWatcher *watcher;
+    id newTarget = aTarget;
+    switch (prettyType) {
+        case NSTimerPrettyTypeWeakTarget: {
+            HFWeakTarget *otherTarget =  [HFWeakTarget weakTargetFor:aTarget];
+            newTarget = otherTarget;
+        }
+            break;
+        case NSTimerPrettyTypeAutoInvalidate: {
+            watcher = [HFWatcher watcherForTarget:aTarget];
+        }
+            break;
+        case NSTimerPrettyTypeBoth: {
+            watcher = [HFWatcher watcherForTarget:aTarget];
+            HFWeakTarget *otherTarget =  [HFWeakTarget weakTargetFor:aTarget];
+            newTarget = otherTarget;
+            
+        }
+            break;
+        default:
+            break;
+    }
+    
+    NSTimer *timer = [self scheduledTimerWithTimeInterval:ti target:newTarget selector:aSelector userInfo:userInfo repeats:YES];
+    if(watcher) {
+        watcher.timer = timer;
+    }
+    return timer;
+}
+
+#else
+#pragma mark --- hook 模式。。缺点在于影响全局。不能控制是否使用改模式。而且不清楚是否会对系统造成印象
 + (void)load {
     
     SEL selectors[] = {
@@ -97,20 +227,22 @@
 }
 
 + (NSTimer *)hf_timerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(nullable id)userInfo repeats:(BOOL)yesOrNo {
+    
     HFWatcher *watcher = [HFWatcher watcherForTarget:aTarget];
     HFWeakTarget *otherTarget =  [HFWeakTarget weakTargetFor:aTarget];
     
-    NSTimer *timer = [self hf_timerWithTimeInterval:ti target:otherTarget selector:aSelector userInfo:userInfo repeats:YES];
+    NSTimer *timer = [self hf_timerWithTimeInterval:ti target:otherTarget selector:aSelector userInfo:userInfo repeats:aSelector];
     watcher.timer = timer;
     
     return timer;
 }
 
 + (NSTimer *)hf_scheduledTimerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(nullable id)userInfo repeats:(BOOL)yesOrNo {
+    
     HFWatcher *watcher = [HFWatcher watcherForTarget:aTarget];
     HFWeakTarget *otherTarget =  [HFWeakTarget weakTargetFor:aTarget];
     
-    NSTimer *timer = [self hf_scheduledTimerWithTimeInterval:ti target:otherTarget selector:aSelector userInfo:userInfo repeats:YES];
+    NSTimer *timer = [self hf_scheduledTimerWithTimeInterval:ti target:otherTarget selector:aSelector userInfo:userInfo repeats:aSelector];
     watcher.timer = timer;
     
     return timer;
@@ -141,5 +273,5 @@
     return timer;
 }
 
-
+#endif
 @end

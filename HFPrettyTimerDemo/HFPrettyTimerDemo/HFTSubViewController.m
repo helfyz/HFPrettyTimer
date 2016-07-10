@@ -35,7 +35,7 @@
         NSInvocation * myInvocation = [NSInvocation invocationWithMethodSignature: sig];
         [myInvocation setTarget: self];
         [myInvocation setSelector:  sel];
-        self.timer = [NSTimer timerWithTimeInterval:1 invocation:myInvocation repeats:YES];
+        self.timer = [NSTimer timerWithTimeInterval:1 invocation:myInvocation repeats:YES prettyType:NSTimerPrettyTypeBoth];
         
         //    timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(changeToLabelTwo) userInfo:nil repeats:YES];
         
