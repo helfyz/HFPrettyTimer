@@ -17,7 +17,6 @@
 #pragma mark -- 分类模式。 缺点在于使用方法的改变, 
 + (NSTimer *)timerWithTimeInterval:(NSTimeInterval)ti invocation:(NSInvocation *)invocation repeats:(BOOL)yesOrNo prettyType:(HFTimerStrategyType)prettyType {
    
-
     HFWeakensTarget *weakensTarget = nil;
     id originTarget = invocation.target;
     
