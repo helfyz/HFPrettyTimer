@@ -17,37 +17,17 @@
 #pragma mark -- 分类模式。 缺点在于使用方法的改变, 
 + (NSTimer *)timerWithTimeInterval:(NSTimeInterval)ti invocation:(NSInvocation *)invocation repeats:(BOOL)yesOrNo prettyType:(HFTimerStrategyType)prettyType {
    
-    
+
     HFWeakensTarget *weakensTarget = nil;
     id originTarget = invocation.target;
-    BOOL needDetector = NO;
-    BOOL needWeakens = NO;
     
-    switch (prettyType) {
-        case HFTimerStrategyWeakenTarget: {
-            needWeakens = YES;
-        }
-            break;
-        case HFTimerStrategyAutoInvalidate: {
-            needDetector = YES;
-        }
-            break;
-        case HFTimerStrategyBoth: {
-            needDetector = YES;
-            needWeakens = YES;
-        }
-            break;
-        default:
-            break;
-    }
-    
-    if(needWeakens) {
+    if(prettyType & HFTimerStrategyWeakenTarget) {
         weakensTarget = [HFWeakensTarget weakensTarget:invocation.target];
         invocation.target = weakensTarget;
     }
     NSTimer *timer = [self timerWithTimeInterval:ti invocation:invocation repeats:yesOrNo];
     
-    if(needDetector) {
+    if(prettyType & HFTimerStrategyAutoInvalidate) {
         __weak typeof(timer) weakTimer = timer;
        [HFDeallocDetector detectorForTarget:originTarget targetDealloc:^(void) {
             [weakTimer invalidate];
@@ -61,34 +41,13 @@
     HFWeakensTarget *weakensTarget = nil;
     id originTarget = invocation.target;
     
-    BOOL needDetector = NO;
-    BOOL needWeakens = NO;
-    
-    switch (prettyType) {
-        case HFTimerStrategyWeakenTarget: {
-            needWeakens = YES;
-        }
-            break;
-        case HFTimerStrategyAutoInvalidate: {
-            needDetector = YES;
-        }
-            break;
-        case HFTimerStrategyBoth: {
-            needDetector = YES;
-            needWeakens = YES;
-        }
-            break;
-        default:
-            break;
-    }
-    
-    if(needWeakens) {
+    if(prettyType & HFTimerStrategyWeakenTarget) {
         weakensTarget =  [HFWeakensTarget weakensTarget:invocation.target];
         invocation.target = weakensTarget;
     }
     
     NSTimer *timer = [self scheduledTimerWithTimeInterval:ti invocation:invocation repeats:yesOrNo];
-    if(needDetector) {
+    if(prettyType & HFTimerStrategyAutoInvalidate) {
         __weak typeof(timer) weakTimer = timer;
          [HFDeallocDetector detectorForTarget:originTarget targetDealloc:^(void) {
             [weakTimer invalidate];
@@ -99,33 +58,15 @@
 
 + (NSTimer *)timerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(nullable id)userInfo repeats:(BOOL)yesOrNo prettyType:(HFTimerStrategyType)prettyType {
     
-    BOOL needDetector = NO;
-    BOOL needWeakens = NO;
     id originTarget = aTarget;
-    switch (prettyType) {
-        case HFTimerStrategyWeakenTarget: {
-            needWeakens = YES;
-        }
-            break;
-        case HFTimerStrategyAutoInvalidate: {
-            needDetector = YES;
-        }
-            break;
-        case HFTimerStrategyBoth: {
-            needDetector = YES;
-            needWeakens = YES;
-        }
-            break;
-        default:
-            break;
-    }
-    if(needWeakens) {
+
+    if(prettyType & HFTimerStrategyWeakenTarget) {
         aTarget = [HFWeakensTarget weakensTarget:aTarget];
     
     }
     NSTimer *timer = [self timerWithTimeInterval:ti target:aTarget selector:aSelector userInfo:userInfo repeats:yesOrNo];
     
-    if(needDetector) {
+    if(prettyType & HFTimerStrategyAutoInvalidate) {
         __weak typeof(timer) weakTimer = timer;
         [HFDeallocDetector detectorForTarget:originTarget targetDealloc:^(void) {
             [weakTimer invalidate];
@@ -136,35 +77,13 @@
 
 + (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(nullable id)userInfo repeats:(BOOL)yesOrNo prettyType:(HFTimerStrategyType)prettyType {
     
-    BOOL needDetector = NO;
-    BOOL needWeakens = NO;
     id originTarget = aTarget;
-    
-    switch (prettyType) {
-        case HFTimerStrategyWeakenTarget: {
-            needWeakens = YES;
-        }
-            break;
-        case HFTimerStrategyAutoInvalidate: {
-            needDetector = YES;
-        }
-            break;
-        case HFTimerStrategyBoth: {
-            needDetector = YES;
-            needWeakens = YES;
-        }
-            break;
-        default:
-            break;
-    }
-    
-    if(needWeakens) {
+    if(prettyType & HFTimerStrategyWeakenTarget) {
         aTarget = [HFWeakensTarget weakensTarget:aTarget];
     }
-    
     NSTimer *timer = [self scheduledTimerWithTimeInterval:ti target:aTarget selector:aSelector userInfo:userInfo repeats:YES];
     
-    if(needDetector) {
+    if(prettyType & HFTimerStrategyAutoInvalidate){
         __weak typeof(timer) weakTimer = timer;
         [HFDeallocDetector detectorForTarget:originTarget targetDealloc:^(void) {
             [weakTimer invalidate];
