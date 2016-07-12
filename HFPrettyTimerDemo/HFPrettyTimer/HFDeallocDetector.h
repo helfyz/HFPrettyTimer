@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void (^HFDeallocDetectedBlock)(void);
+
 @interface HFDeallocDetector : NSObject
 
-@property (nonatomic, strong, readonly) void(^ targetDealloc)(void);
+@property (nonatomic, strong, readonly) HFDeallocDetectedBlock deallocDetectedHandler;
 
 /**
  *  观察一个target是否释放，释放后调用block
@@ -20,6 +22,6 @@
  *
  *  @return 实例对象
  */
-+ (HFDeallocDetector *)detectorForTarget:(id)target targetDealloc:(void(^)(void))targetDealloc;
++ (HFDeallocDetector *)detectorForTarget:(id)target deallocDetectedHandler:(HFDeallocDetectedBlock)handler;
 
 @end

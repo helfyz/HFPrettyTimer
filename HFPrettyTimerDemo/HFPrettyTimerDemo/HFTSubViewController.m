@@ -35,7 +35,7 @@
         NSInvocation * myInvocation = [NSInvocation invocationWithMethodSignature: sig];
         [myInvocation setTarget: self];
         [myInvocation setSelector:  sel];
-        self.timer = [NSTimer timerWithTimeInterval:1 invocation:myInvocation repeats:YES prettyType:HFTimerStrategyAutoInvalidate];
+        self.timer = [NSTimer timerWithTimeInterval:1 invocation:myInvocation repeats:YES prettyStrategy:HFTimerStrategyAutoInvalidate];
     
 //            self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(changNumber) userInfo:nil repeats:YES prettyType:HFTimerStrategyBoth];
     

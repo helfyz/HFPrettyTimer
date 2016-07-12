@@ -20,4 +20,5 @@
  *  @return 弱化后的实例对象
  */
 + (HFWeakensTarget *)weakensTarget:(id)target;
+
 @end
