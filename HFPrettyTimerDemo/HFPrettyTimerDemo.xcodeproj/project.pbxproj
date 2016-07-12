@@ -18,6 +18,8 @@
 		A80B7A9E1D327BE5006EC923 /* NSTimer+HF.m in Sources */ = {isa = PBXBuildFile; fileRef = A80B7A9D1D327BE5006EC923 /* NSTimer+HF.m */; };
 		A80B7AA21D327C7C006EC923 /* HFTSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A80B7AA01D327C7C006EC923 /* HFTSubViewController.m */; };
 		A80B7AA31D327C7C006EC923 /* HFTSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A80B7AA11D327C7C006EC923 /* HFTSubViewController.xib */; };
+		A8ABA7EA1D3491AF00E5D106 /* HFDeallocDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = A8ABA7E91D3491AF00E5D106 /* HFDeallocDetector.m */; };
+		A8ABA7F01D34957800E5D106 /* HFWeakensTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = A8ABA7EF1D34957800E5D106 /* HFWeakensTarget.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,10 @@
 		A80B7A9F1D327C7C006EC923 /* HFTSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HFTSubViewController.h; sourceTree = "<group>"; };
 		A80B7AA01D327C7C006EC923 /* HFTSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HFTSubViewController.m; sourceTree = "<group>"; };
 		A80B7AA11D327C7C006EC923 /* HFTSubViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HFTSubViewController.xib; sourceTree = "<group>"; };
+		A8ABA7E81D3491AF00E5D106 /* HFDeallocDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HFDeallocDetector.h; sourceTree = "<group>"; };
+		A8ABA7E91D3491AF00E5D106 /* HFDeallocDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HFDeallocDetector.m; sourceTree = "<group>"; };
+		A8ABA7EE1D34957800E5D106 /* HFWeakensTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HFWeakensTarget.h; sourceTree = "<group>"; };
+		A8ABA7EF1D34957800E5D106 /* HFWeakensTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HFWeakensTarget.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +163,10 @@
 			children = (
 				A80B7A9C1D327BE5006EC923 /* NSTimer+HF.h */,
 				A80B7A9D1D327BE5006EC923 /* NSTimer+HF.m */,
+				A8ABA7E81D3491AF00E5D106 /* HFDeallocDetector.h */,
+				A8ABA7E91D3491AF00E5D106 /* HFDeallocDetector.m */,
+				A8ABA7EE1D34957800E5D106 /* HFWeakensTarget.h */,
+				A8ABA7EF1D34957800E5D106 /* HFWeakensTarget.m */,
 			);
 			path = HFPrettyTimer;
 			sourceTree = SOURCE_ROOT;
@@ -292,9 +302,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8ABA7EA1D3491AF00E5D106 /* HFDeallocDetector.m in Sources */,
 				A80B7AA21D327C7C006EC923 /* HFTSubViewController.m in Sources */,
 				A80B7A6C1D327B7C006EC923 /* ViewController.m in Sources */,
 				A80B7A691D327B7C006EC923 /* AppDelegate.m in Sources */,
+				A8ABA7F01D34957800E5D106 /* HFWeakensTarget.m in Sources */,
 				A80B7A9E1D327BE5006EC923 /* NSTimer+HF.m in Sources */,
 				A80B7A661D327B7C006EC923 /* main.m in Sources */,
 			);
@@ -520,6 +532,7 @@
 				A80B7A901D327B7C006EC923 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A80B7A911D327B7C006EC923 /* Build configuration list for PBXNativeTarget "HFPrettyTimerDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -528,6 +541,7 @@
 				A80B7A931D327B7C006EC923 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A80B7A941D327B7C006EC923 /* Build configuration list for PBXNativeTarget "HFPrettyTimerDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -536,6 +550,7 @@
 				A80B7A961D327B7C006EC923 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

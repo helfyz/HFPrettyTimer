@@ -30,16 +30,16 @@
 
 - (IBAction)startTimer:(id)sender {
     
-        SEL sel = @selector(changNumber);
-        NSMethodSignature * sig = [[self class]  instanceMethodSignatureForSelector: sel];
-        NSInvocation * myInvocation = [NSInvocation invocationWithMethodSignature: sig];
-        [myInvocation setTarget: self];
-        [myInvocation setSelector:  sel];
-        self.timer = [NSTimer timerWithTimeInterval:1 invocation:myInvocation repeats:YES prettyType:NSTimerPrettyTypeBoth];
-        
-        //    timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(changeToLabelTwo) userInfo:nil repeats:YES];
-        
-        //    timer = [[NSTimer alloc] initWithFireDate:[NSDate date] interval:1 target:self selector:@selector(changeToLabelTwo) userInfo:Nil repeats:YES];
+//        SEL sel = @selector(changNumber);
+//        NSMethodSignature * sig = [[self class]  instanceMethodSignatureForSelector: sel];
+//        NSInvocation * myInvocation = [NSInvocation invocationWithMethodSignature: sig];
+//        [myInvocation setTarget: self];
+//        [myInvocation setSelector:  sel];
+//        self.timer = [NSTimer timerWithTimeInterval:1 invocation:myInvocation repeats:YES prettyType:HFTimerStrategyBoth];
+    
+            self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(changNumber) userInfo:nil repeats:YES prettyType:HFTimerStrategyBoth];
+    
+        //    timer = [[NSTimer alloc] initWithFireDate:[NSDate date] interval:1 target:self selector:@selector(changNumber) userInfo:Nil repeats:YES];
         
         [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
 
