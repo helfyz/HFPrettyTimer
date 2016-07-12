@@ -14,7 +14,7 @@
 
 @interface NSTimer (HF)
 
-//#ifndef HF_TIMER_USE_HOOK_MODE
+#ifndef HF_TIMER_USE_HOOK_MODE
 
 typedef NS_ENUM(NSInteger,HFTimerStrategyType) {
     

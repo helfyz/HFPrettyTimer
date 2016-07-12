@@ -37,10 +37,10 @@
 //        [myInvocation setSelector:  sel];
 //        self.timer = [NSTimer timerWithTimeInterval:1 invocation:myInvocation repeats:YES prettyType:HFTimerStrategyBoth];
     
-            self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(changNumber) userInfo:nil repeats:YES prettyType:HFTimerStrategyBoth];
+//            self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(changNumber) userInfo:nil repeats:YES prettyType:HFTimerStrategyBoth];
     
-        //    timer = [[NSTimer alloc] initWithFireDate:[NSDate date] interval:1 target:self selector:@selector(changNumber) userInfo:Nil repeats:YES];
-        
+            self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(changNumber) userInfo:nil repeats:YES];
+    
         [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
 
 }
