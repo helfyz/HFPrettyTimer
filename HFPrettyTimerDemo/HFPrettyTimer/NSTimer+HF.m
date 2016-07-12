@@ -195,48 +195,53 @@
 
 + (NSTimer *)hf_timerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(nullable id)userInfo repeats:(BOOL)yesOrNo {
     
-    HFWatcher *watcher = [HFWatcher watcherForTarget:aTarget];
-    HFWeakTarget *otherTarget =  [HFWeakTarget weakTargetFor:aTarget];
-    
-    NSTimer *timer = [self hf_timerWithTimeInterval:ti target:otherTarget selector:aSelector userInfo:userInfo repeats:aSelector];
-    watcher.timer = timer;
-    
+    HFWeakensTarget *weakensTarget =  [HFWeakensTarget weakensTarget:aTarget];
+    NSTimer *timer = [self hf_timerWithTimeInterval:ti target:weakensTarget selector:aSelector userInfo:userInfo repeats:aSelector];
+    __weak typeof(timer) weakTimer = timer;
+    [HFDeallocDetector detectorForTarget:aTarget targetDealloc:^(void) {
+        [weakTimer invalidate];
+    }];
     return timer;
 }
 
 + (NSTimer *)hf_scheduledTimerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(nullable id)userInfo repeats:(BOOL)yesOrNo {
     
-    HFWatcher *watcher = [HFWatcher watcherForTarget:aTarget];
-    HFWeakTarget *otherTarget =  [HFWeakTarget weakTargetFor:aTarget];
+    HFWeakensTarget *weakensTarget =  [HFWeakensTarget weakensTarget:aTarget];
     
-    NSTimer *timer = [self hf_scheduledTimerWithTimeInterval:ti target:otherTarget selector:aSelector userInfo:userInfo repeats:aSelector];
-    watcher.timer = timer;
+    NSTimer *timer = [self hf_scheduledTimerWithTimeInterval:ti target:weakensTarget selector:aSelector userInfo:userInfo repeats:aSelector];
     
+    __weak typeof(timer) weakTimer = timer;
+    [HFDeallocDetector detectorForTarget:aTarget targetDealloc:^(void) {
+        [weakTimer invalidate];
+    }];
     return timer;
 }
 #pragma  mark NSInvocation 模式
 + (NSTimer *)hf_timerWithTimeInterval:(NSTimeInterval)ti invocation:(NSInvocation *)invocation repeats:(BOOL)yesOrNo {
   
-    HFWatcher *watcher = [HFWatcher watcherForTarget:invocation.target];
-    HFWeakTarget *otherTarget =  [HFWeakTarget weakTargetFor:invocation.target];
-    
-    invocation.target = otherTarget;
+    id originTarget = invocation.target;
+    invocation.target = [HFWeakensTarget weakensTarget:invocation.target];;
     
     NSTimer *timer = [self hf_timerWithTimeInterval:ti invocation:invocation repeats:yesOrNo];
-    watcher.timer = timer;
-    
+  
+    __weak typeof(timer) weakTimer = timer;
+    [HFDeallocDetector detectorForTarget:originTarget targetDealloc:^(void) {
+        [weakTimer invalidate];
+    }];
     return timer;
 }
 
 + (NSTimer *)hf_scheduledTimerWithTimeInterval:(NSTimeInterval)ti invocation:(NSInvocation *)invocation repeats:(BOOL)yesOrNo {
     
-    HFWatcher *watcher = [HFWatcher watcherForTarget:invocation.target];
-    HFWeakTarget *otherTarget =  [HFWeakTarget weakTargetFor:invocation.target];
-    invocation.target = otherTarget;
+    id originTarget = invocation.target;
+    invocation.target = [HFWeakensTarget weakensTarget:invocation.target];;
     
     NSTimer *timer = [self hf_scheduledTimerWithTimeInterval:ti invocation:invocation repeats:yesOrNo];
-        watcher.timer = timer;
     
+    __weak typeof(timer) weakTimer = timer;
+    [HFDeallocDetector detectorForTarget:originTarget targetDealloc:^(void) {
+        [weakTimer invalidate];
+    }];
     return timer;
 }
 
