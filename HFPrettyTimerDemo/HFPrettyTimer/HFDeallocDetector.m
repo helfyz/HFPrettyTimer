@@ -8,29 +8,34 @@
 
 #import "HFDeallocDetector.h"
 #import <objc/runtime.h>
+
+@interface HFDeallocDetector ()
+
+@property (nonatomic, strong, readwrite) HFDeallocDetectedBlock deallocDetectedHandler;
+
+@end
+
 @implementation HFDeallocDetector
 
-+ (HFDeallocDetector *)detectorForTarget:(id)target targetDealloc:(void(^)(void)) targetDealloc {
-    
-    HFDeallocDetector *detector = [[HFDeallocDetector alloc] initWithTarget:target targetDealloc:targetDealloc];
-    objc_setAssociatedObject(target, @selector(selecotrForDetector), detector, OBJC_ASSOCIATION_RETAIN);
-    return detector;
-}
-
-- (void)selecotrForDetector {
-    
-}
-
-- (instancetype)initWithTarget:(id)tetget targetDealloc:(void(^)(void))targetDealloc {
-    
+- (instancetype)initWithTarget:(id)tetget deallocDetectedHandler:(HFDeallocDetectedBlock)handler{
     self = [super init];
     if(self) {
-        _targetDealloc = targetDealloc;
+        _deallocDetectedHandler = handler;
     }
     return self;
 }
 
 - (void)dealloc {
-    !_targetDealloc?:_targetDealloc();
+    _deallocDetectedHandler? : _deallocDetectedHandler();
 }
+
++ (HFDeallocDetector *)detectorForTarget:(id)target deallocDetectedHandler:(HFDeallocDetectedBlock)handler; {
+    HFDeallocDetector *detector = [[HFDeallocDetector alloc] initWithTarget:target deallocDetectedHandler:handler];
+    objc_setAssociatedObject(target, @selector(selecotrForDetector), detector, OBJC_ASSOCIATION_RETAIN);
+    return detector;
+}
+
+- (void)selecotrForDetector {
+}
+
 @end
