@@ -12,13 +12,6 @@
 
 @property (nonatomic, weak) id target;
 
-/**
- *  弱化一个target 的引用
- *
- *  @param target 对象
- *
- *  @return 弱化后的实例对象
- */
 + (HFWeakensTarget *)weakensTarget:(id)target;
 
 @end
