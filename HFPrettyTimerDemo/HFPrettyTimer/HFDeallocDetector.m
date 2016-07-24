@@ -26,12 +26,12 @@
 }
 
 - (void)dealloc {
-    _deallocDetectedHandler? : _deallocDetectedHandler();
+    !_deallocDetectedHandler? : _deallocDetectedHandler();
 }
 
 + (HFDeallocDetector *)detectorForTarget:(id)target deallocDetectedHandler:(HFDeallocDetectedBlock)handler; {
     HFDeallocDetector *detector = [[HFDeallocDetector alloc] initWithTarget:target deallocDetectedHandler:handler];
-    objc_setAssociatedObject(target, @selector(selecotrForDetector), detector, OBJC_ASSOCIATION_RETAIN);
+    objc_setAssociatedObject(target, @selector(selecotrForDetector), detector, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     return detector;
 }
 

@@ -7,46 +7,46 @@
 //
 
 #import "HFTSubViewController.h"
-#import "NSTimer+HF.h"
+#import "NSTimer+HFPretty.h"
+#import "HFWeakensTarget.h"
+
 @interface HFTSubViewController ()
+
 @property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong) NSTimer *timer1;
+
 @end
 
 @implementation HFTSubViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-}
-
-- (void) dealloc {
-    NSLog(@"timer持有者被释放");
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (IBAction)startTimer:(id)sender {
-    
-        SEL sel = @selector(changNumber);
-        NSMethodSignature * sig = [[self class]  instanceMethodSignatureForSelector: sel];
-        NSInvocation * myInvocation = [NSInvocation invocationWithMethodSignature: sig];
-        [myInvocation setTarget: self];
-        [myInvocation setSelector:  sel];
-        self.timer = [NSTimer timerWithTimeInterval:1 invocation:myInvocation repeats:YES prettyStrategy:HFTimerStrategyAutoInvalidate];
-    
-//            self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(changNumber) userInfo:nil repeats:YES prettyType:HFTimerStrategyBoth];
-    
-//            self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(changNumber) userInfo:nil repeats:YES];
-    
-        [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+    @PrettyTimer(self)
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(changeNumber) userInfo:nil repeats:YES];
+//    self.timer1 = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(changeNumber1) userInfo:nil repeats:YES];
+//        SEL sel = @selector(changNumber);
+//        NSMethodSignature * sig = [[self class]  instanceMethodSignatureForSelector: sel];
+//        NSInvocation * myInvocation = [NSInvocation invocationWithMethodSignature: sig];
+//        [myInvocation setTarget: self];
+//        [myInvocation setSelector:  sel];
+//        self.timer = [NSTimer timerWithTimeInterval:1 invocation:myInvocation repeats:YES prettyStrategy:HFTimerStrategyAutoInvalidate];
+//    
+////            self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(changNumber) userInfo:nil repeats:YES prettyType:HFTimerStrategyBoth];
+//    
+////            self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(changNumber) userInfo:nil repeats:YES];
+//    
+    [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
+//    [[NSRunLoop currentRunLoop] addTimer:self.timer1 forMode:NSDefaultRunLoopMode];
+    [self.timer fire];
+//    [self.timer1 fire];
 
 }
 
-- (void)changNumber {
-    
+- (void)changeNumber {
     NSLog(@"changNumber");
 }
+
+- (void)changeNumber1 {
+    NSLog(@"changNumber1");
+}
+
 @end

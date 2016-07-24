@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		56E5CD5A1D44C24400D3FD77 /* NSObject+HFPretty.m in Sources */ = {isa = PBXBuildFile; fileRef = 56E5CD591D44C24400D3FD77 /* NSObject+HFPretty.m */; };
 		A80B7A661D327B7C006EC923 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A80B7A651D327B7C006EC923 /* main.m */; };
 		A80B7A691D327B7C006EC923 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A80B7A681D327B7C006EC923 /* AppDelegate.m */; };
 		A80B7A6C1D327B7C006EC923 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A80B7A6B1D327B7C006EC923 /* ViewController.m */; };
@@ -15,7 +16,7 @@
 		A80B7A741D327B7C006EC923 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A80B7A721D327B7C006EC923 /* LaunchScreen.storyboard */; };
 		A80B7A7F1D327B7C006EC923 /* HFPrettyTimerDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A80B7A7E1D327B7C006EC923 /* HFPrettyTimerDemoTests.m */; };
 		A80B7A8A1D327B7C006EC923 /* HFPrettyTimerDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A80B7A891D327B7C006EC923 /* HFPrettyTimerDemoUITests.m */; };
-		A80B7A9E1D327BE5006EC923 /* NSTimer+HF.m in Sources */ = {isa = PBXBuildFile; fileRef = A80B7A9D1D327BE5006EC923 /* NSTimer+HF.m */; };
+		A80B7A9E1D327BE5006EC923 /* NSTimer+HFPretty.m in Sources */ = {isa = PBXBuildFile; fileRef = A80B7A9D1D327BE5006EC923 /* NSTimer+HFPretty.m */; };
 		A80B7AA21D327C7C006EC923 /* HFTSubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A80B7AA01D327C7C006EC923 /* HFTSubViewController.m */; };
 		A80B7AA31D327C7C006EC923 /* HFTSubViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A80B7AA11D327C7C006EC923 /* HFTSubViewController.xib */; };
 		A8ABA7EA1D3491AF00E5D106 /* HFDeallocDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = A8ABA7E91D3491AF00E5D106 /* HFDeallocDetector.m */; };
@@ -40,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		56E5CD581D44C24400D3FD77 /* NSObject+HFPretty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+HFPretty.h"; sourceTree = "<group>"; };
+		56E5CD591D44C24400D3FD77 /* NSObject+HFPretty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+HFPretty.m"; sourceTree = "<group>"; };
 		A80B7A611D327B7C006EC923 /* HFPrettyTimerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HFPrettyTimerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A80B7A651D327B7C006EC923 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A80B7A671D327B7C006EC923 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -56,8 +59,8 @@
 		A80B7A851D327B7C006EC923 /* HFPrettyTimerDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HFPrettyTimerDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A80B7A891D327B7C006EC923 /* HFPrettyTimerDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HFPrettyTimerDemoUITests.m; sourceTree = "<group>"; };
 		A80B7A8B1D327B7C006EC923 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A80B7A9C1D327BE5006EC923 /* NSTimer+HF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+HF.h"; sourceTree = "<group>"; };
-		A80B7A9D1D327BE5006EC923 /* NSTimer+HF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+HF.m"; sourceTree = "<group>"; };
+		A80B7A9C1D327BE5006EC923 /* NSTimer+HFPretty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+HFPretty.h"; sourceTree = "<group>"; };
+		A80B7A9D1D327BE5006EC923 /* NSTimer+HFPretty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+HFPretty.m"; sourceTree = "<group>"; };
 		A80B7A9F1D327C7C006EC923 /* HFTSubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HFTSubViewController.h; sourceTree = "<group>"; };
 		A80B7AA01D327C7C006EC923 /* HFTSubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HFTSubViewController.m; sourceTree = "<group>"; };
 		A80B7AA11D327C7C006EC923 /* HFTSubViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HFTSubViewController.xib; sourceTree = "<group>"; };
@@ -161,8 +164,10 @@
 		A80B7A9B1D327BE5006EC923 /* HFPrettyTimer */ = {
 			isa = PBXGroup;
 			children = (
-				A80B7A9C1D327BE5006EC923 /* NSTimer+HF.h */,
-				A80B7A9D1D327BE5006EC923 /* NSTimer+HF.m */,
+				56E5CD581D44C24400D3FD77 /* NSObject+HFPretty.h */,
+				56E5CD591D44C24400D3FD77 /* NSObject+HFPretty.m */,
+				A80B7A9C1D327BE5006EC923 /* NSTimer+HFPretty.h */,
+				A80B7A9D1D327BE5006EC923 /* NSTimer+HFPretty.m */,
 				A8ABA7E81D3491AF00E5D106 /* HFDeallocDetector.h */,
 				A8ABA7E91D3491AF00E5D106 /* HFDeallocDetector.m */,
 				A8ABA7EE1D34957800E5D106 /* HFWeakensTarget.h */,
@@ -307,8 +312,9 @@
 				A80B7A6C1D327B7C006EC923 /* ViewController.m in Sources */,
 				A80B7A691D327B7C006EC923 /* AppDelegate.m in Sources */,
 				A8ABA7F01D34957800E5D106 /* HFWeakensTarget.m in Sources */,
-				A80B7A9E1D327BE5006EC923 /* NSTimer+HF.m in Sources */,
+				A80B7A9E1D327BE5006EC923 /* NSTimer+HFPretty.m in Sources */,
 				A80B7A661D327B7C006EC923 /* main.m in Sources */,
+				56E5CD5A1D44C24400D3FD77 /* NSObject+HFPretty.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

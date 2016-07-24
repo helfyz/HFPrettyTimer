@@ -11,7 +11,7 @@
 @implementation HFWeakensTarget
 
 + (HFWeakensTarget *)weakensTarget:(id)target {
-    HFWeakensTarget *weakens = [[HFWeakensTarget alloc] init];
+    HFWeakensTarget *weakens = [HFWeakensTarget new];
     weakens.target = target;
     return weakens;
 }
@@ -24,5 +24,24 @@
     return self.target;
 }
 
+- (Class)class {
+    return [self.target class];
+}
+
+- (BOOL)isKindOfClass:(Class)aClass {
+    return [self.target isKindOfClass:aClass];
+}
+
+- (BOOL)isMemberOfClass:(Class)aClass {
+    return [self.target isMemberOfClass:aClass];
+}
+
+- (BOOL)conformsToProtocol:(Protocol *)aProtocol {
+    return [self.target conformsToProtocol:aProtocol];
+}
+
+- (NSString *)description {
+    return [self.target description];
+}
 
 @end
