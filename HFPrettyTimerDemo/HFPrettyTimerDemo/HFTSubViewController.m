@@ -9,7 +9,7 @@
 #import "HFTSubViewController.h"
 #import "NSTimer+HFPretty.h"
 #import "HFWeakensTarget.h"
-
+#import "HFDeallocDetector.h"
 @interface HFTSubViewController ()
 
 @property (nonatomic, strong) NSTimer *timer;
@@ -21,9 +21,10 @@
 
 - (IBAction)startTimer:(id)sender {
     @PrettyTimer(self)
+    
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(changeNumber) userInfo:nil repeats:YES];
-//    self.timer1 = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(changeNumber1) userInfo:nil repeats:YES];
-//        SEL sel = @selector(changNumber);
+    self.timer1 = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(changeNumber1) userInfo:nil repeats:YES];
+////        SEL sel = @selector(changNumber);
 //        NSMethodSignature * sig = [[self class]  instanceMethodSignatureForSelector: sel];
 //        NSInvocation * myInvocation = [NSInvocation invocationWithMethodSignature: sig];
 //        [myInvocation setTarget: self];
@@ -35,9 +36,9 @@
 ////            self.timer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(changNumber) userInfo:nil repeats:YES];
 //    
     [[NSRunLoop currentRunLoop] addTimer:self.timer forMode:NSDefaultRunLoopMode];
-//    [[NSRunLoop currentRunLoop] addTimer:self.timer1 forMode:NSDefaultRunLoopMode];
+    [[NSRunLoop currentRunLoop] addTimer:self.timer1 forMode:NSDefaultRunLoopMode];
     [self.timer fire];
-//    [self.timer1 fire];
+    [self.timer1 fire];
 
 }
 
@@ -49,4 +50,7 @@
     NSLog(@"changNumber1");
 }
 
+- (void)dealloc {
+    NSLog(@"%@ dealloc",self.class);
+}
 @end
