@@ -39,7 +39,7 @@
     [[NSRunLoop currentRunLoop] addTimer:self.timer1 forMode:NSDefaultRunLoopMode];
     [self.timer fire];
     [self.timer1 fire];
-
+  
 }
 
 - (void)changeNumber {
