@@ -8,4 +8,9 @@
   
   和HFTimer(https://github.com/helfyz/HFTimer) 不同的是， HTTimer 检测的是timer本身不被持有，便会被销毁
   HFPrettyTimer 检测的是target，target被销毁，timer也没有存在的意义了吧
+  
+  
+   不知道为什么，pod一直push不上， 暂时 这么用吧
+   
+       pod 'HFPrettyTimer', :git => 'https://github.com/helfyz/HFPrettyTimer.git', :tag=> '0.0.1'
  
