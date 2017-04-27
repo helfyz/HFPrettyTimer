@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "HFPrettyTimer"
-  s.version      = "0.0.1"
+  s.version      = "0.1.0"
   s.summary      = "NSTimmer强引用 自动化处理"
   s.description  = <<-DESC
         NSTimmer强引用 自动化处理
