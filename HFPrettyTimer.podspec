@@ -15,6 +15,8 @@ Pod::Spec.new do |s|
         NSTimmer强引用 自动化处理
                    DESC
   s.platform     = :ios
+  s.ios.deployment_target = '7.0'
+  s.requires_arc          = true
   s.homepage    = "https://github.com/helfyz/HFPrettyTimer"
   s.license     = "MIT"
   s.author      = { "helfy" => "562812743@qq.com" }
