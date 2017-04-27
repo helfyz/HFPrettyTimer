@@ -14,12 +14,11 @@ Pod::Spec.new do |s|
   s.description  = <<-DESC
         NSTimmer强引用 自动化处理
                    DESC
-
+  s.platform     = :ios
   s.homepage    = "https://github.com/helfyz/HFPrettyTimer"
   s.license     = "MIT"
   s.author      = { "helfy" => "562812743@qq.com" }
   s.source              = { :git => "git@github.com:helfyz/HFPrettyTimer.git", :tag => "#{s.version}" }
   s.source_files        = "HFPrettyTimer", "HFPrettyTimer/**/*.{h,m}"
-  s.public_header_files = "HFTableViewManger/Classes/**/*.h"
-
+  s.public_header_files = "HFPrettyTimer/**/*.h"
 end
