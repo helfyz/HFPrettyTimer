@@ -12,5 +12,5 @@
   
    不知道为什么，pod一直push不上， 暂时 这么用吧
    
-       pod 'HFPrettyTimer', :git => 'https://github.com/helfyz/HFPrettyTimer.git', :tag=> '0.0.1'
+       pod 'HFPrettyTimer', :git => 'https://github.com/helfyz/HFPrettyTimer.git', :tag=> '0.1.0'
  
